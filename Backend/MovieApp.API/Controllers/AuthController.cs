@@ -7,6 +7,7 @@ using System.Text;
 using MovieApp.Domain.Entities;
 using MovieApp.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace MovieApp.API.Controllers
 {
@@ -83,13 +84,24 @@ namespace MovieApp.API.Controllers
 
     public class UserRegisterDto
     {
+        [Required(ErrorMessage = "El email es obligatorio.")]
+        [EmailAddress(ErrorMessage = "El email no tiene un formato válido.")]
         public string Email { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "La contraseña es obligatoria.")]
+        [MinLength(6, ErrorMessage = "La contraseña debe tener al menos 6 caracteres.")]
+        [RegularExpression(@"^(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{6,}$", ErrorMessage = "La contraseña debe tener al menos una mayúscula y un carácter especial.")]
         public string Password { get; set; } = string.Empty;
     }
 
     public class UserLoginDto
     {
+        [Required(ErrorMessage = "El email es obligatorio.")]
+        [EmailAddress(ErrorMessage = "El email no tiene un formato válido.")]
         public string Email { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "La contraseña es obligatoria.")]
         public string Password { get; set; } = string.Empty;
     }
+
 }
