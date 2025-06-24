@@ -1,0 +1,25 @@
+<UserControl x:Class="MovieApp.WPF.Views.Components.HeaderControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MovieApp.WPF.Views.Components"
+             xmlns:vm="clr-namespace:MovieApp.WPF.ViewModels"
+             Height="50">
+    <Grid Background="#EEE">
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Margin="0 0 10 0">
+            <!-- Iniciar sesion -->
+            <Button Content="Iniciar sesion"
+                    Command="{Binding LoginCommand}"
+                    Visibility="{Binding IsLoggedIn, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=false}"
+                    Margin="5"/>
+
+            <!-- Cerrar sesion -->
+            <Button Content="Cerrar sesion"
+                    Command="{Binding LogoutCommand}"
+                    Visibility="{Binding IsLoggedIn, Converter={StaticResource BoolToVisibilityConverter}}"
+                    Margin="5"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

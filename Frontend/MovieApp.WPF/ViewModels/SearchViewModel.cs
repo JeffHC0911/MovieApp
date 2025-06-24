@@ -22,6 +22,13 @@ namespace MovieApp.WPF.ViewModels
 
         public ICommand SearchCommand { get; }
         public ICommand AddFavoriteCommand { get; }
+        public ICommand LoginCommand { get; }
+        public ICommand LogoutCommand { get; }
+
+        public bool IsLoggedIn => AuthService.IsLoggedIn;
+
+        public event Action? OnLoginRequested;
+        public event Action? OnLogout;
 
         public SearchViewModel()
         {
@@ -42,6 +49,13 @@ namespace MovieApp.WPF.ViewModels
 
             AddFavoriteCommand = new RelayCommand<MovieDto>(async (movie) =>
             {
+                if (!AuthService.IsLoggedIn)
+                {
+                    MessageBox.Show("Debes iniciar sesión para agregar a favoritos.");
+                    OnLoginRequested?.Invoke();
+                    return;
+                }
+
                 try
                 {
                     var success = await MovieService.AddFavoriteAsync(movie);
@@ -52,6 +66,18 @@ namespace MovieApp.WPF.ViewModels
                 {
                     MessageBox.Show("Error al agregar a favoritos: " + ex.Message);
                 }
+            });
+
+            LoginCommand = new RelayCommand(() =>
+            {
+                OnLoginRequested?.Invoke();
+            });
+
+            LogoutCommand = new RelayCommand(() =>
+            {
+                AuthService.Logout();
+                OnPropertyChanged(nameof(IsLoggedIn));
+                OnLogout?.Invoke(); // Vuelve a SearchView
             });
         }
 

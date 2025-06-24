@@ -9,6 +9,9 @@ namespace MovieApp.WPF.Services
     {
         public static string? Token { get; private set; }
 
+        public static bool IsLoggedIn => !string.IsNullOrWhiteSpace(Token);
+
+
         private static readonly HttpClient _http = new HttpClient
         {
             BaseAddress = new Uri("https://localhost:7293") // Cambia al puerto de tu API
@@ -43,6 +46,13 @@ namespace MovieApp.WPF.Services
 
             return response.IsSuccessStatusCode;
         }
+
+        public static void Logout()
+        {
+            Token = null;
+            _http.DefaultRequestHeaders.Authorization = null;
+        }
+
 
     }
 }

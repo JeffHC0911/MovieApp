@@ -22,9 +22,16 @@ namespace MovieApp.WPF.ViewModels
         public void ShowSearchView()
         {
             var vm = new SearchViewModel();
-            //vm.OnLoginSuccess += ShowSearchView;
-            //vm.OnRegisterRequested += ShowRegisterView;
+            vm.OnLoginRequested += ShowLoginView;
+            vm.OnLogout += ShowSearchView;
             CurrentViewModel = vm;
+        }
+
+        public void ShowLoginView()
+        {
+            var loginVM = new LoginViewModel();
+            loginVM.OnLoginSuccess += ShowSearchView;
+            CurrentViewModel = loginVM;
         }
 
         /*public void ShowRegisterView()
