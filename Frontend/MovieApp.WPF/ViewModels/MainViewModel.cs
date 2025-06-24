@@ -29,6 +29,7 @@ namespace MovieApp.WPF.ViewModels
 
         public void ShowLoginView()
         {
+            MessageBox.Show("Cambiando CurrentViewModel a LoginViewModel");
             var loginVM = new LoginViewModel();
             loginVM.OnLoginSuccess += ShowSearchView;
             CurrentViewModel = loginVM;

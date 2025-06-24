@@ -5,6 +5,7 @@
              xmlns:vm="clr-namespace:MovieApp.WPF.ViewModels"
              Height="50">
     <Grid Background="#EEE">
+        
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"

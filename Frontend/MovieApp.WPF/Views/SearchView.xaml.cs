@@ -8,7 +8,7 @@ namespace MovieApp.WPF.Views
         public SearchView()
         {
             InitializeComponent();
-            DataContext = new SearchViewModel();
+            //DataContext = new SearchViewModel();
         }
     }
 }

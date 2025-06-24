@@ -70,8 +70,10 @@ namespace MovieApp.WPF.ViewModels
 
             LoginCommand = new RelayCommand(() =>
             {
+                MessageBox.Show("Login solicitado desde header"); // solo para prueba
                 OnLoginRequested?.Invoke();
             });
+
 
             LogoutCommand = new RelayCommand(() =>
             {
