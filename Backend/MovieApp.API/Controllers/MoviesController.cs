@@ -6,7 +6,7 @@ namespace MovieApp.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
+    //[Authorize]
     public class MoviesController : ControllerBase
     {
         private readonly OmdbService _omdb;

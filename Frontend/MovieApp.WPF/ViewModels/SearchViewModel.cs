@@ -1,13 +1,62 @@
-﻿using MovieApp.WPF.ViewModels.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows;
+using System.Windows.Input;
+using MovieApp.WPF.Models;
+using MovieApp.WPF.Services;
+using MovieApp.WPF.ViewModels.Base;
 
 namespace MovieApp.WPF.ViewModels
 {
     public class SearchViewModel : BaseViewModel
     {
+        private string _searchTerm = string.Empty;
+        public string SearchTerm
+        {
+            get => _searchTerm;
+            set { _searchTerm = value; OnPropertyChanged(); }
+        }
+
+        public ObservableCollection<MovieDto> SearchResults { get; set; } = new();
+
+        public ICommand SearchCommand { get; }
+        public ICommand AddFavoriteCommand { get; }
+
+        public SearchViewModel()
+        {
+            SearchCommand = new RelayCommand(async () =>
+            {
+                try
+                {
+                    var results = await MovieService.SearchMoviesAsync(SearchTerm);
+                    SearchResults.Clear();
+                    foreach (var movie in results)
+                        SearchResults.Add(movie);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al buscar películas: " + ex.Message);
+                }
+            });
+
+            AddFavoriteCommand = new RelayCommand<MovieDto>(async (movie) =>
+            {
+                try
+                {
+                    var success = await MovieService.AddFavoriteAsync(movie);
+                    if (!success)
+                        MessageBox.Show("No se pudo agregar a favoritos.");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al agregar a favoritos: " + ex.Message);
+                }
+            });
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        private void OnPropertyChanged([CallerMemberName] string? name = null)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }

@@ -22,7 +22,7 @@ namespace MovieApp.Infrastructure.Services
 
         public async Task<object?> SearchByTitleAsync(string title)
         {
-            var url = $"https://www.omdbapi.com/?apikey={_apiKey}&t={Uri.EscapeDataString(title)}";
+            var url = $"https://www.omdbapi.com/?apikey={_apiKey}&s={Uri.EscapeDataString(title)}";
 
             var response = await _httpClient.GetAsync(url);
             if (!response.IsSuccessStatusCode)

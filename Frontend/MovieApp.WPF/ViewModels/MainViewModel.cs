@@ -1,6 +1,7 @@
-﻿using System.ComponentModel;
+﻿using MovieApp.WPF.ViewModels.Base;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using MovieApp.WPF.ViewModels.Base;
+using System.Windows;
 
 namespace MovieApp.WPF.ViewModels
 {
@@ -15,13 +16,13 @@ namespace MovieApp.WPF.ViewModels
 
         public MainViewModel()
         {
-            ShowLoginView();
+            ShowSearchView();
         }
 
-        public void ShowLoginView()
+        public void ShowSearchView()
         {
-            var vm = new LoginViewModel();
-            vm.OnLoginSuccess += ShowSearchView;
+            var vm = new SearchViewModel();
+            //vm.OnLoginSuccess += ShowSearchView;
             //vm.OnRegisterRequested += ShowRegisterView;
             CurrentViewModel = vm;
         }
@@ -35,9 +36,10 @@ namespace MovieApp.WPF.ViewModels
         }
         */
 
-        public void ShowSearchView()
+        /*public void ShowSearchView()
         {
             CurrentViewModel = new SearchViewModel();
         }
+        */
     }
 }

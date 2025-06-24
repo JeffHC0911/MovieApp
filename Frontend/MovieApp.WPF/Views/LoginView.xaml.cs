@@ -8,7 +8,6 @@ namespace MovieApp.WPF.Views
         public LoginView()
         {
             InitializeComponent();
-            this.DataContext = new LoginViewModel(); //Aquí se asigna el ViewModel
         }
 
         private void PasswordBox_PasswordChanged(object sender, System.Windows.RoutedEventArgs e)
