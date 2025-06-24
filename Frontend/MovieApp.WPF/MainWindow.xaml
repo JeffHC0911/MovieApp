@@ -4,6 +4,6 @@
         xmlns:views="clr-namespace:MovieApp.WPF.Views"
         Title="MovieApp" Height="450" Width="800">
     <Grid>
-        <views:LoginView />
+        <views:RegisterView />
     </Grid>
 </Window>

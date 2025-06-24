@@ -32,5 +32,17 @@ namespace MovieApp.WPF.Services
 
             return true;
         }
+
+        public static async Task<bool> RegisterAsync(string email, string password)
+        {
+            var response = await _http.PostAsJsonAsync("/api/auth/register", new UserRegisterDto
+            {
+                Email = email,
+                Password = password
+            });
+
+            return response.IsSuccessStatusCode;
+        }
+
     }
 }
