@@ -1,0 +1,36 @@
+﻿using System.Net.Http;
+using System.Net.Http.Json;
+using System.Threading.Tasks;
+using MovieApp.WPF.Models;
+
+namespace MovieApp.WPF.Services
+{
+    public static class AuthService
+    {
+        public static string? Token { get; private set; }
+
+        private static readonly HttpClient _http = new HttpClient
+        {
+            BaseAddress = new Uri("https://localhost:7293") // Cambia al puerto de tu API
+        };
+
+        public static async Task<bool> LoginAsync(string email, string password)
+        {
+            var response = await _http.PostAsJsonAsync("/api/auth/login", new LoginDto
+            {
+                Email = email,
+                Password = password
+            });
+
+            if (!response.IsSuccessStatusCode) return false;
+
+            var result = await response.Content.ReadFromJsonAsync<LoginResponseDto>();
+            Token = result?.Token;
+
+            if (Token != null)
+                _http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
+
+            return true;
+        }
+    }
+}
