@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.Text.Json;
 using Microsoft.Extensions.Configuration;
+using MovieApp.Application.DTOs;
 
 namespace MovieApp.Infrastructure.Services
 {
@@ -20,16 +21,30 @@ namespace MovieApp.Infrastructure.Services
             _apiKey = config["Omdb:ApiKey"] ?? throw new Exception("OMDb API key no configurada");
         }
 
-        public async Task<object?> SearchByTitleAsync(string title)
+        public async Task<List<MovieDto>> SearchByTitleAsync(string title)
         {
             var url = $"https://www.omdbapi.com/?apikey={_apiKey}&s={Uri.EscapeDataString(title)}";
 
             var response = await _httpClient.GetAsync(url);
             if (!response.IsSuccessStatusCode)
-                return null;
+                return new List<MovieDto>();
 
             var json = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<object>(json);
+
+            var omdbResult = JsonSerializer.Deserialize<OmdbSearchResponse>(json, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
+
+            if (omdbResult == null || omdbResult.Response != "True")
+                return new List<MovieDto>();
+
+            return omdbResult.Search.Select(m => new MovieDto
+            {
+                Title = m.Title,
+                Year = m.Year,
+                Poster = m.Poster
+            }).ToList();
         }
     }
 }

@@ -11,25 +11,32 @@
                 <Button Content="Buscar" Command="{Binding SearchCommand}" Background="#FF626FD6" Foreground="#FFFDF6F6" HorizontalAlignment="Center" VerticalAlignment="Center" />
             </StackPanel>
 
-            <ListBox ItemsSource="{Binding SearchResults}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Border BorderBrush="Gray" BorderThickness="1" Padding="10" Margin="0 0 0 10">
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                <Image Source="{Binding Poster}" Width="50" Height="75" Margin="0 0 10 0"/>
+            <ScrollViewer>
+                <ItemsControl ItemsSource="{Binding SearchResults}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel IsItemsHost="True" Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="8" Margin="10" Width="150">
                                 <StackPanel>
-                                    <TextBlock Text="{Binding Title}" FontWeight="Bold"/>
-                                    <TextBlock Text="{Binding Year}" />
+                                    <Image Source="{Binding Poster}" Height="200" Stretch="UniformToFill" />
+                                    <TextBlock Text="{Binding Title}" FontWeight="Bold" TextAlignment="Center" Margin="5 2"/>
+                                    <TextBlock Text="{Binding Year}" FontSize="12" TextAlignment="Center"/>
+                                    <Button Content="❤️"
+                                Command="{Binding DataContext.AddFavoriteCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                CommandParameter="{Binding}"
+                                Margin="0 5 0 5"/>
                                 </StackPanel>
-                                <Button Content="❤️"
-                                        Command="{Binding DataContext.AddFavoriteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                        CommandParameter="{Binding}" 
-                                        Margin="20 0 0 0"/>
-                            </StackPanel>
-                        </Border>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+
         </StackPanel>
     </Grid>
 </UserControl>
