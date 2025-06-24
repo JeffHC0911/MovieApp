@@ -1,28 +1,22 @@
-﻿using System.ComponentModel;
+﻿using MovieApp.WPF.Services;
+using MovieApp.WPF.ViewModels.Base;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Input;
-using MovieApp.WPF.Services;
 
 namespace MovieApp.WPF.ViewModels
 {
-    public class LoginViewModel : INotifyPropertyChanged
+    public class LoginViewModel : BaseViewModel
     {
-        private string _email = string.Empty;
-        private string _password = string.Empty;
-
-        public string Email
-        {
-            get => _email;
-            set { _email = value; OnPropertyChanged(); }
-        }
-
-        public string Password
-        {
-            get => _password;
-            set { _password = value; OnPropertyChanged(); }
-        }
+        public string Email { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
 
         public ICommand LoginCommand { get; }
+        public ICommand GoToRegisterCommand { get; }
+
+        public event Action? OnLoginSuccess;
+        public event Action? OnRegisterRequested;
 
         public LoginViewModel()
         {
@@ -30,18 +24,16 @@ namespace MovieApp.WPF.ViewModels
             {
                 var success = await AuthService.LoginAsync(Email, Password);
                 if (success)
-                {
-                    // Lógica para navegar a SearchView (lo hacemos luego)
-                }
+                    OnLoginSuccess?.Invoke();
                 else
-                {
-                    // Mostrar mensaje de error
-                }
+                    MessageBox.Show("Login fallido");
+            });
+
+            GoToRegisterCommand = new RelayCommand(() =>
+            {
+                OnRegisterRequested?.Invoke();
             });
         }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        private void OnPropertyChanged([CallerMemberName] string? name = null)
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
+
 }
