@@ -48,13 +48,14 @@ namespace MovieApp.WPF.ViewModels
                 if (!AuthService.IsLoggedIn)
                 {
                     MessageBox.Show("Debes iniciar sesión para agregar a favoritos.");
-                    OnLoginRequested?.Invoke();
+                    //OnLoginRequested?.Invoke();
                     return;
                 }
 
                 try
                 {
                     var success = await MovieService.AddFavoriteAsync(movie);
+                    MessageBox.Show("Agregada a favoritos.");
                     if (!success)
                         MessageBox.Show("No se pudo agregar a favoritos.");
                 }

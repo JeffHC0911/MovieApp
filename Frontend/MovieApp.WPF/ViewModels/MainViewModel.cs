@@ -33,7 +33,7 @@ namespace MovieApp.WPF.ViewModels
             {
                 AuthService.Logout();
                 OnPropertyChanged(nameof(IsLoggedIn));
-                ShowSearchView(); // Vuelve a búsqueda tras logout
+                //ShowSearchView(); // Vuelve a búsqueda tras logout
             });
 
             ShowSearchView(); // Vista inicial
