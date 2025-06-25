@@ -5,41 +5,98 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d">
 
+    <UserControl.Resources>
+        <!-- Estilo para el botón de búsqueda -->
+        <Style x:Key="SearchButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#2C3E50"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,2"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#3E5F78"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Estilo para el TextBox -->
+        <Style x:Key="SearchTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="BorderBrush" Value="#BDC3C7"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Width" Value="300"/>
+        </Style>
+    </UserControl.Resources>
+
     <Grid Margin="20">
         <StackPanel>
-            <!-- 🔍 Buscador -->
+            <!-- Buscador -->
             <StackPanel Orientation="Horizontal" Margin="0 0 0 20">
-                <TextBox Width="300"
+                <TextBox Style="{StaticResource SearchTextBoxStyle}"
                          Text="{Binding SearchTerm, UpdateSourceTrigger=PropertyChanged}"
-                         Margin="0 0 10 0" />
+                         Margin="0 0 10 0"/>
                 <Button Content="Buscar"
-                        Command="{Binding SearchCommand}"
-                        Background="#FF626FD6"
-                        Foreground="White"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center" />
+                        Style="{StaticResource SearchButtonStyle}"
+                        Command="{Binding SearchCommand}" />
             </StackPanel>
 
-            <!-- 🎬 Resultados -->
-            <ScrollViewer>
+            <!-- Resultados -->
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <ItemsControl ItemsSource="{Binding SearchResults}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <WrapPanel Orientation="Horizontal" />
+                            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
 
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="8" Margin="10" Width="150">
+                            <Border BorderBrush="#CCC"
+                                    BorderThickness="1"
+                                    CornerRadius="8"
+                                    Margin="8"
+                                    Width="140"
+                                    Background="White">
                                 <StackPanel>
-                                    <Image Source="{Binding Poster}" Height="200" Stretch="UniformToFill" />
-                                    <TextBlock Text="{Binding Title}" FontWeight="Bold" TextAlignment="Center" Margin="5 2"/>
-                                    <TextBlock Text="{Binding Year}" FontSize="12" TextAlignment="Center"/>
+                                    <Image Source="{Binding Poster}"
+                                           Height="120"
+                                           Stretch="UniformToFill"
+                                           Margin="0 0 0 6"/>
+                                    <TextBlock Text="{Binding Title}"
+                                               FontWeight="Bold"
+                                               TextAlignment="Center"
+                                               FontSize="13"
+                                               Margin="4 2"
+                                               Foreground="#2C3E50"
+                                               TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Year}"
+                                               FontSize="11"
+                                               TextAlignment="Center"
+                                               Foreground="Gray"/>
                                     <Button Content="❤️"
                                             Command="{Binding DataContext.AddFavoriteCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                             CommandParameter="{Binding}"
-                                            Margin="0 5 0 5"/>
+                                            Margin="0 4 0 6"
+                                            Background="Transparent"
+                                            Foreground="Red"
+                                            BorderThickness="0"
+                                            FontSize="14"
+                                            HorizontalAlignment="Center"/>
                                 </StackPanel>
                             </Border>
                         </DataTemplate>
