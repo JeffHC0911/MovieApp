@@ -57,7 +57,7 @@ namespace MovieApp.WPF.Services
             return response.IsSuccessStatusCode;
         }
 
-        public static async Task<List<MovieDto>> GetFavoritesAsync()
+        public static async Task<List<FavoritesDto>> GetFavoritesAsync()
         {
             if (!string.IsNullOrWhiteSpace(AuthService.Token))
             {
@@ -69,8 +69,8 @@ namespace MovieApp.WPF.Services
             if (!response.IsSuccessStatusCode)
                 throw new Exception("Error al obtener películas favoritas");
 
-            var favorites = await response.Content.ReadFromJsonAsync<List<MovieDto>>();
-            return favorites ?? new List<MovieDto>();
+            var favorites = await response.Content.ReadFromJsonAsync<List<FavoritesDto>>();
+            return favorites ?? new List<FavoritesDto>();
         }
 
     }

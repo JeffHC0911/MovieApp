@@ -8,7 +8,7 @@ namespace MovieApp.WPF.ViewModels
 {
     public class FavoritesViewModel : BaseViewModel
     {
-        public ObservableCollection<MovieDto> FavoriteMovies { get; } = new();
+        public ObservableCollection<FavoritesDto> FavoriteMovies { get; } = new();
 
         public FavoritesViewModel()
         {
