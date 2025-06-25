@@ -6,6 +6,10 @@
              Height="50">
     <Grid Background="#EEE">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+            <Button Content="Inicio"
+        Command="{Binding ShowHomeCommand}"
+        Margin="5"/>
+
             <Button Content="Favoritas"
         Command="{Binding ShowFavoritesCommand}"
         Visibility="{Binding IsLoggedIn, Converter={StaticResource BoolToVisibilityConverter}}"

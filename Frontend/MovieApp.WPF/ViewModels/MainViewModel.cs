@@ -25,6 +25,8 @@ namespace MovieApp.WPF.ViewModels
         public ICommand LogoutCommand { get; }
         public ICommand RegisterCommand { get; }
         public ICommand ShowFavoritesCommand { get; }
+        public ICommand ShowHomeCommand { get; }
+
         public bool IsLoggedIn => AuthService.IsLoggedIn;
 
         public MainViewModel()
@@ -41,6 +43,9 @@ namespace MovieApp.WPF.ViewModels
             RegisterCommand = new RelayCommand(ShowRegisterView);
 
             ShowFavoritesCommand = new RelayCommand(ShowFavoritesView);
+
+            ShowHomeCommand = new RelayCommand(ShowSearchView);
+
 
             ShowSearchView(); // Vista inicial
         }
