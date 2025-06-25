@@ -1,7 +1,8 @@
-﻿using System.Net.Http;
+﻿using MovieApp.WPF.Models;
+using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using MovieApp.WPF.Models;
+using System.Windows;
 
 namespace MovieApp.WPF.Services
 {
@@ -44,7 +45,14 @@ namespace MovieApp.WPF.Services
                 Password = password
             });
 
-            return response.IsSuccessStatusCode;
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorMsg = await response.Content.ReadAsStringAsync();
+                MessageBox.Show($"Error del servidor: {errorMsg}");
+                return false;
+            }
+
+            return true;
         }
 
         public static void Logout()

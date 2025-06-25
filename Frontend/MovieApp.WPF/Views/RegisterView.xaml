@@ -62,6 +62,11 @@
                 <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource RegisterTextBox}" />
 
                 <TextBlock Text="Contrasena" FontWeight="SemiBold"/>
+                <TextBlock Text="La contrasena debe tener al menos 6 caracteres, incluir una letra mayuscula y un caracter especial."
+         FontSize="10"
+         Foreground="Gray"
+         TextWrapping="Wrap"
+         Margin="0 0 0 10"/>
                 <PasswordBox x:Name="PasswordBox" PasswordChanged="PasswordBox_PasswordChanged" Style="{StaticResource RegisterPasswordBox}" />
 
                 <TextBlock Text="Confirmar contrasena" FontWeight="SemiBold"/>
