@@ -56,5 +56,22 @@ namespace MovieApp.WPF.Services
             var response = await _http.PostAsJsonAsync("/api/favorites", payload);
             return response.IsSuccessStatusCode;
         }
+
+        public static async Task<List<MovieDto>> GetFavoritesAsync()
+        {
+            if (!string.IsNullOrWhiteSpace(AuthService.Token))
+            {
+                _http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AuthService.Token);
+            }
+
+            var response = await _http.GetAsync("/api/favorites");
+
+            if (!response.IsSuccessStatusCode)
+                throw new Exception("Error al obtener películas favoritas");
+
+            var favorites = await response.Content.ReadFromJsonAsync<List<MovieDto>>();
+            return favorites ?? new List<MovieDto>();
+        }
+
     }
 }

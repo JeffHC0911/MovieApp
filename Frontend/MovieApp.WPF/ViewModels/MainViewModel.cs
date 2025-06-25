@@ -24,6 +24,7 @@ namespace MovieApp.WPF.ViewModels
         public ICommand LoginCommand { get; }
         public ICommand LogoutCommand { get; }
         public ICommand RegisterCommand { get; }
+        public ICommand ShowFavoritesCommand { get; }
         public bool IsLoggedIn => AuthService.IsLoggedIn;
 
         public MainViewModel()
@@ -38,6 +39,8 @@ namespace MovieApp.WPF.ViewModels
             });
 
             RegisterCommand = new RelayCommand(ShowRegisterView);
+
+            ShowFavoritesCommand = new RelayCommand(ShowFavoritesView);
 
             ShowSearchView(); // Vista inicial
         }
@@ -58,8 +61,6 @@ namespace MovieApp.WPF.ViewModels
             CurrentViewModel = loginVM;
             OnPropertyChanged(nameof(IsLoggedIn));
         }
-
-        // Opcional: si quieres incluir registro después
         
         public void ShowRegisterView()
         {
@@ -68,6 +69,12 @@ namespace MovieApp.WPF.ViewModels
             vm.OnCancelRegister += ShowLoginView;
             CurrentViewModel = vm;
         }
-        
+
+        public void ShowFavoritesView()
+        {
+            var vm = new FavoritesViewModel();
+            CurrentViewModel = vm;
+        }
+
     }
 }

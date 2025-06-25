@@ -19,5 +19,9 @@
             <views:SearchView />
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type vm:FavoritesViewModel}">
+            <views:FavoritesView />
+        </DataTemplate>
+
     </Application.Resources>
 </Application>
