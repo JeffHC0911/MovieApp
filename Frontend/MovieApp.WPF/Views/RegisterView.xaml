@@ -54,7 +54,7 @@
 
     <Grid Background="#f8f8f8">
         <Border Background="White" CornerRadius="10" Padding="30" Width="350" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                BorderBrush="#ddd" BorderThickness="1" >
+                BorderBrush="#ddd" BorderThickness="1">
             <StackPanel>
                 <TextBlock Text="Registro de usuario" FontSize="24" FontWeight="Bold" Foreground="#2C3E50" TextAlignment="Center" Margin="0 0 0 20"/>
 
@@ -63,6 +63,11 @@
 
                 <TextBlock Text="Contrasena" FontWeight="SemiBold"/>
                 <PasswordBox x:Name="PasswordBox" PasswordChanged="PasswordBox_PasswordChanged" Style="{StaticResource RegisterPasswordBox}" />
+
+                <TextBlock Text="Confirmar contrasena" FontWeight="SemiBold"/>
+                <PasswordBox x:Name="ConfirmPasswordBox"
+                             PasswordChanged="ConfirmPasswordBox_PasswordChanged"
+                             Style="{StaticResource RegisterPasswordBox}" />
 
                 <Button Content="Registrarse" Command="{Binding RegisterCommand}" Style="{StaticResource RegisterButton}" />
             </StackPanel>

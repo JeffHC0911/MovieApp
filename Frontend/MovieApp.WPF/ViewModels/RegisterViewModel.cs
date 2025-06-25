@@ -10,6 +10,8 @@ namespace MovieApp.WPF.ViewModels
     {
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
+        public string ConfirmPassword { get; set; } = string.Empty;
+
 
         public ICommand RegisterCommand { get; }
         public ICommand GoToLoginCommand { get; }
@@ -21,6 +23,18 @@ namespace MovieApp.WPF.ViewModels
         {
             RegisterCommand = new RelayCommand(async () =>
             {
+                if (string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Password) || string.IsNullOrWhiteSpace(ConfirmPassword))
+                {
+                    MessageBox.Show("Completa todos los campos");
+                    return;
+                }
+
+                if (Password != ConfirmPassword)
+                {
+                    MessageBox.Show("Las contrasenas no coinciden");
+                    return;
+                }
+
                 var success = await AuthService.RegisterAsync(Email, Password);
                 if (success)
                 {
