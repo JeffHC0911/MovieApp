@@ -10,6 +10,10 @@
                 Command="{Binding LoginCommand}"
                 Visibility="{Binding IsLoggedIn, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=false}"
                 Margin="5"/>
+            <Button Content="Registrarse"
+            Command="{Binding RegisterCommand}"
+            Visibility="{Binding IsLoggedIn, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=false}"
+            Margin="5"/>
             <Button Content="Cerrar sesion"
                 Command="{Binding LogoutCommand}"
                 Visibility="{Binding IsLoggedIn, Converter={StaticResource BoolToVisibilityConverter}}"

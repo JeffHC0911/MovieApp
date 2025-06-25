@@ -8,7 +8,6 @@ namespace MovieApp.WPF.Views
         public RegisterView()
         {
             InitializeComponent();
-            DataContext = new RegisterViewModel();
         }
 
         private void PasswordBox_PasswordChanged(object sender, System.Windows.RoutedEventArgs e)

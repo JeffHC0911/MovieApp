@@ -23,6 +23,7 @@ namespace MovieApp.WPF.ViewModels
         // 👇 Propiedades para el Header
         public ICommand LoginCommand { get; }
         public ICommand LogoutCommand { get; }
+        public ICommand RegisterCommand { get; }
         public bool IsLoggedIn => AuthService.IsLoggedIn;
 
         public MainViewModel()
@@ -35,6 +36,8 @@ namespace MovieApp.WPF.ViewModels
                 OnPropertyChanged(nameof(IsLoggedIn));
                 //ShowSearchView(); // Vuelve a búsqueda tras logout
             });
+
+            RegisterCommand = new RelayCommand(ShowRegisterView);
 
             ShowSearchView(); // Vista inicial
         }
@@ -57,7 +60,7 @@ namespace MovieApp.WPF.ViewModels
         }
 
         // Opcional: si quieres incluir registro después
-        /*
+        
         public void ShowRegisterView()
         {
             var vm = new RegisterViewModel();
@@ -65,6 +68,6 @@ namespace MovieApp.WPF.ViewModels
             vm.OnCancelRegister += ShowLoginView;
             CurrentViewModel = vm;
         }
-        */
+        
     }
 }

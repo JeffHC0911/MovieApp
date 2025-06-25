@@ -1,48 +1,42 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using MovieApp.WPF.Services;
+using MovieApp.WPF.ViewModels.Base;
+using System;
+using System.Windows;
 using System.Windows.Input;
-using MovieApp.WPF.Services;
 
 namespace MovieApp.WPF.ViewModels
 {
-    public class RegisterViewModel : INotifyPropertyChanged
+    public class RegisterViewModel : BaseViewModel
     {
-        private string _email = string.Empty;
-        private string _password = string.Empty;
-
-        public string Email
-        {
-            get => _email;
-            set { _email = value; OnPropertyChanged(); }
-        }
-
-        public string Password
-        {
-            get => _password;
-            set { _password = value; OnPropertyChanged(); }
-        }
+        public string Email { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
 
         public ICommand RegisterCommand { get; }
+        public ICommand GoToLoginCommand { get; }
+
+        public event Action? OnRegisterSuccess;
+        public event Action? OnCancelRegister;
 
         public RegisterViewModel()
         {
             RegisterCommand = new RelayCommand(async () =>
             {
                 var success = await AuthService.RegisterAsync(Email, Password);
-
                 if (success)
                 {
-                    // Aquí podrías mostrar un mensaje y redirigir a login
+                    MessageBox.Show("Registro exitoso. Ahora puedes iniciar sesión.");
+                    OnRegisterSuccess?.Invoke();
                 }
                 else
                 {
-                    // Mostrar mensaje de error
+                    MessageBox.Show("El registro ha fallado. Verifica los datos o intenta más tarde.");
                 }
             });
-        }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-        private void OnPropertyChanged([CallerMemberName] string? name = null)
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            GoToLoginCommand = new RelayCommand(() =>
+            {
+                OnCancelRegister?.Invoke();
+            });
+        }
     }
 }
