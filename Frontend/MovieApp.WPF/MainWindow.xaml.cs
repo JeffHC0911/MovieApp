@@ -20,7 +20,14 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        //DataContext = new MainViewModel();
+
+        Loaded += (_, _) =>
+        {
+            if (Application.Current.MainWindow?.DataContext is MainViewModel vm)
+            {
+                this.DataContext = vm;
+            }
+        };
     }
 
     private void LoginView_Loaded(object sender, RoutedEventArgs e)

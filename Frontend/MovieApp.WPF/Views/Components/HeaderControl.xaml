@@ -5,22 +5,16 @@
              xmlns:vm="clr-namespace:MovieApp.WPF.ViewModels"
              Height="50">
     <Grid Background="#EEE">
-        
-        <StackPanel Orientation="Horizontal"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center"
-                    Margin="0 0 10 0">
-            <!-- Iniciar sesion -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
             <Button Content="Iniciar sesion"
-                    Command="{Binding LoginCommand}"
-                    Visibility="{Binding IsLoggedIn, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=false}"
-                    Margin="5"/>
-
-            <!-- Cerrar sesion -->
+                Command="{Binding LoginCommand}"
+                Visibility="{Binding IsLoggedIn, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=false}"
+                Margin="5"/>
             <Button Content="Cerrar sesion"
-                    Command="{Binding LogoutCommand}"
-                    Visibility="{Binding IsLoggedIn, Converter={StaticResource BoolToVisibilityConverter}}"
-                    Margin="5"/>
+                Command="{Binding LogoutCommand}"
+                Visibility="{Binding IsLoggedIn, Converter={StaticResource BoolToVisibilityConverter}}"
+                Margin="5"/>
         </StackPanel>
     </Grid>
+
 </UserControl>

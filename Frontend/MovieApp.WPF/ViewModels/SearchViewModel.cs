@@ -22,10 +22,6 @@ namespace MovieApp.WPF.ViewModels
 
         public ICommand SearchCommand { get; }
         public ICommand AddFavoriteCommand { get; }
-        public ICommand LoginCommand { get; }
-        public ICommand LogoutCommand { get; }
-
-        public bool IsLoggedIn => AuthService.IsLoggedIn;
 
         public event Action? OnLoginRequested;
         public event Action? OnLogout;
@@ -67,24 +63,7 @@ namespace MovieApp.WPF.ViewModels
                     MessageBox.Show("Error al agregar a favoritos: " + ex.Message);
                 }
             });
-
-            LoginCommand = new RelayCommand(() =>
-            {
-                MessageBox.Show("Login solicitado desde header"); // solo para prueba
-                OnLoginRequested?.Invoke();
-            });
-
-
-            LogoutCommand = new RelayCommand(() =>
-            {
-                AuthService.Logout();
-                OnPropertyChanged(nameof(IsLoggedIn));
-                OnLogout?.Invoke(); // Vuelve a SearchView
-            });
         }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        private void OnPropertyChanged([CallerMemberName] string? name = null)
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
+
 }
