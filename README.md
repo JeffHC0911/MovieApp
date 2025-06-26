@@ -47,7 +47,7 @@ Si necesita mayor claridad en el proceso, puede ver el siguiente manual que expl
 2. Configura los valores sensibles con **Secret Manager**:  
    El primero es la clave JWT  
    El segundo es la cadena de conexión a MySQL  
-   El tercero es la clave de la API de OMDb
+   El tercero es la clave de la API de OMDb. La Api Key la puede obtener en el siguiente enlace, en la opción Api Key: (https://www.omdbapi.com)
 
    ```bash
    dotnet user-secrets set "Jwt:Key" "clave-super-secreta" --project Backend/MovieApp.API
