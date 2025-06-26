@@ -2,12 +2,14 @@
 # 🎬 MovieApp – Prueba Técnica
 
 Aplicación de escritorio que permite buscar películas usando la API pública de OMDb y guardar favoritas en una cuenta personal. Desarrollada como prueba técnica aplicando diseño de interfaces con WPF.
+Si desea ver un video en el que se muestre y explique el uso del sistema, acceda al siguiente enlace: 
+[📄 Ver video de uso del sistema](https://drive.google.com/file/d/1yf5K7xp1ZkqptzmCJQkcapuLpAKCtrP9/view?usp=drive_link)
 
 ---
 
 ## 🔧 Prerrequisitos
 
-Antes de ejecutar el proyecto, asegúrate de tener instalado lo siguiente:
+Antes de ejecutar el proyecto, asegúrate de tener instalado lo siguiente (IMPORTANTE: Si no desea instalar MySQL en local, más abajo se proporciona una conexión desplegada en la nube):
 
 - [.NET SDK 8.0 o superior](https://dotnet.microsoft.com/en-us/download) – Para este proyecto se utilizó la versión 9.0
 - [MySQL Server](https://dev.mysql.com/downloads/mysql/) – Motor de base de datos utilizado para persistencia.
