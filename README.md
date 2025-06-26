@@ -32,6 +32,8 @@ Antes de ejecutar el proyecto, asegúrate de tener instalado lo siguiente:
 ## ▶️ Pasos para ejecutar la solución
 
 ### 🔹 Backend (API) y Frontend (WPF)
+Si necesita mayor claridad en el proceso, puede ver el siguiente manual que explica mejor el proceso de configuración en variables como claves secretas, conexiones a bases de datos, etc.
+[📄 Ver manual de instalación y ejecución](https://docs.google.com/document/d/15smCGgU2BJ0vR8sGiF-CNirbB7jZBfO4u_YZzkfntqE/edit?usp=sharing)
 
 1. Clona el repositorio y accede a la raíz del proyecto:
 
